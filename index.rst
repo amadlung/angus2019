@@ -1,5 +1,5 @@
 
-**GUIDE NAME**
+**ANGUS 2019**
 ==============
 
 .. #### Comment: If the platform has an ICON place it here
@@ -16,7 +16,9 @@ Goal
 	:maxdepth: 2
 
 	Tutorial home <self>
-	First Step <step1.rst>
+	Welcome <welcome.rst>
+	Code of Conduct <codeofconduct.rst>
+	Agenda <agenda.rst>
 	Last Step <step2.rst>
 	Delete this example guide page <example_directives_delete.rst>
 
@@ -75,43 +77,18 @@ Platform(s)
       - |Discovery Environment|
       - |DE Manual|
       - |Discovery Environment Guide|
-    * - Atmosphere
-      - Command line (ssh) and/or Desktop (VNC)
-      - |Atmosphere|
-      - |Atmosphere Manual|
-      - |Atmosphere Guide|
-    * - BisQue
-      - Web/Point-and-click and/or Command-line (API)
-      - |BisQue|
-      - |BisQue Manual|
-      - (See Manual)
-    * - DNA Subway
-      - Web/Point-and-click
-      - |DNA Subway|
-      - (See Guide)
-      - |DNA Subway Guide|
-    * - SciApps
-      - Command-line (API)
-      - |SciApps|
-      - (See Guide)
-      - |SciApps Guide|
-    * - Agave API
-      - Command-line (API)
-      - |Agave API|
-      - |Agave Live Docs|
-      - (See Live Docs)
+
 ----
 
 **Fix or improve this documentation**
 
 - On Github: |Github Repo Link|
-- Send feedback: `Tutorials@CyVerse.org <Tutorials@CyVerse.org>`_
+- Send feedback: ` <Tutorials@CyVerse.org>`_
 - Live chat/help: Click on the |intercom| on the bottom-right of the page for questions on documentation
 
 ----
 
-|Home_Icon|_
-`Learning Center Home <http://learning.cyverse.org/>`__
+
 
 .. Comment: Place Images Below This Line
    use :width: to give a desired width for your image
