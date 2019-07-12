@@ -17,6 +17,7 @@ Goal
 
 	Tutorial home <self>
 	Welcome <welcome.rst>
+	Bio332_stats_intro <self>
 	
 
 ..
