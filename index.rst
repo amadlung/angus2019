@@ -17,10 +17,7 @@ Goal
 
 	Tutorial home <self>
 	Welcome <welcome.rst>
-	Code of Conduct <codeofconduct.rst>
-	Agenda <agenda.rst>
-	Last Step <step2.rst>
-	Delete this example guide page <example_directives_delete.rst>
+	
 
 ..
 	#### Comment:This tutorial can have multiple pages. The table of contents assumes
