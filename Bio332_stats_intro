@@ -1,0 +1,206 @@
+## Biology 332
+
+# Statistics
+
+# Introduction
+While not a pre-requisite, those of you who have taken Bio 211 (Ecology) or Math 160 or 260 (Statistics) will find this lab a lot easier than those of you without statistics knowledge.
+Plant Physiology requires you to use statistics, but there is no time to cover the basics of statistics in the same way that other classes do. That said, you will need to learn some statistics in a hurry to analyze your independent project data, but it isn’t absolutely required that you understand the underlying math to use statistics if you are willing to learn some statistics protocols and simply carry them out. I would recommend that you at a later time do take either Math 260 or Bio 211 if you haven’t to give you a more nuanced view of statistics. This lab will teach you two things:
+
+Objectives:
+1.	Learn to use RStudio to execute and edit pre-written scripts. 
+2.	Learn the basics of statistical test and when to use them.
+
+This lab is done in the computer lab. You will need to use RStudio software and you will need the R script called Bio332_19_Quick_R_stats_AM122018.R which you can find on Canvas.
+
+If you are either new to statistics or new to RStudio, start with exercise 1.
+If you are both familiar with RStudio and with t-tests and ANOVA analyses, skip exercise 1 and start with the expedited version (exercise 2).
+
+
+OPTIONAL (to do at home not in lab)
+(in lab we will use the lab computers but it might be nice for you to have the software on your own machine)
+On your own computer, go to the following website:
+```
+https://www.r-project.org/
+```
+Click on “download R”. From the “mirror” website, choose a site located in the USA, such as this one:
+https://cran.cnr.berkeley.edu/
+
+On the next site, click on Download R for Mac or Windows (depending on your system). Generally, you want to download the latest release of R. If you have an older computer, you might have to download an older version of R. Read the instructions next to the package name. Then click on the package needed (for example R-3.5.1.pkg), and follow the instructions on your computer to install the software. If you have trouble with any of these steps, ask your instructor or IA for help.
+
+1.	Download RStudio
+On your computer go to the following website:
+https://www.rstudio.com/products/rstudio/download/#download
+
+Under “Installers for Supported Platforms”, click on the version that matches your system (Mac or Windows).
+Follow the installation directions on your computer to download and install RStudio.
+If you have trouble with any of these steps, ask your instructor or IA for help.
+
+2.	Download the R script from Moodle for today’s lab onto your computer’s desktop (move it from Downloads to Desktop). If you don’t know how to do this, ask your IA or instructor for help. If your files are not in the correct location on your computer, the script will not work.
+
+
+Exercise 1:
+
+T-Test and ANOVA analysis using the professional (and free) software package R
+
+Introduction 
+This lab assumes that you remember from Bio 111 how to use Microsoft Excel to organize your data, calculate means, and graph your data. If you didn’t take Bio 111 here and do not know how to use Excel, let me know and I can give you some exercises to catch up.
+A really important aspect of interpreting any biological data is to be aware of the amount of variation that individual points within a data set have. If there is great agreement between replicates, you can be more certain that the next time you measure a replicate of the same experiment you will get a value similar to the average. However, if there is a lot of variation from one individual data point to the next, you will have less certainty that the next measurement you might take will be close to the average of the previously measured observations. We will start with performing two different tests: A T-test and an ANOVA. You will learn the mathematical differences between these tests in other classes but for now you need to remember one main difference: T-tests are used when you compare the means of TWO categories only. If you have more than two categories to compare, you MUST use an ANOVA.
+
+We will introduce you to a software package that you will use continually in many biology (and other subject) courses from now on until you graduate (and likely beyond). This software is called R. It was developed by mathematicians, computer scientists, and natural scientists. It has lots of so-called “packages” that can analyze special data sets, visualize your data, or perform routine basic statistics. You will start with some basic functions. One warning up front: you may find R to be less user friendly than Excel and to have a steep learning curve (aka confusing and frustrating at the beginning), but with time you will come to appreciate the power of R and understand why most scientists use this software in their research. R requires you to execute computer code. This code follows specific rules and any small error in writing the code leads to failure. As you start out you don’t have to write the code yourself. We will provide code snippets that you can use, but you do have to edit the code so that it works on your computer and with your data. The software R runs in the background of a graphical user interface software called RStudio, which is also free and installed on most computers in Thompson Hall. You can download it onto your own computer – and I would recommend that you do so.
+
+T-Test and ANOVA analysis using R and RStudio
+
+Before starting this section take note of the following table which lists the five computer files you will need. Refer to the table to avoid confusion:
+
+File name	Purpose
+Bio332_own_ANOVA.csv	You will make this file.
+Bio332_ttest(111).csv	Example data for t-test (on Canvas)
+Bio332_ANOVA(111).csv	Example data for ANOVA (on Canvas)
+Bio332_19_ttest(111).R	R script for t-test (on Canvas)
+Bio332_19_ANOVA(111).R	R script for ANOVA (on Canvas)
+
+Before starting below take note of the steps you will do one by one so as not to get confused what you need to do:
+1.	Locate example files and scripts (files 2-5 in table above).
+2.	Run t-test using example file.
+3.	Run ANOVA using example file.
+4.	Make a copy of the ANOVA script, edit it, then use it to run your own ANOVA.
+5.	Create a data file of your own data for ANOVA analysis (using Excel).
+6.	Show graphs and statistical results to instructor BEFORE leaving lab.
+
+
+A. Locate your R scripts and test files
+
+On the Canvas website you will find two test data files called Bio332_19_ttest(111).csv
+and Bio332_19_ANOVA(111).csv. Download both files to your Desktop folder. Now download the R scripts (which are called Bio332_19_ttest(111).R and Bio332_19_ANOVA(111).R). Only after running the test files, modify the script (as described later) and then use your own data to analyze and graph your results.
+
+Note: R will take the information from the .csv file for graphing the data. If you want the axes to read anything different from “Treatment”, “Response”, “Control”, “Treatment_A”, “Treatment_B” etc. you need to make the changes in the .csv file. But be careful: if you change the column labels (first row, here “Treatment”, “Response”) you need to make the requisite changes in your script. Read this last paragraph starting with “Note:” again after running the test files and it will make more sense.
+
+B.  Running the scripts
+
+T-test
+1.	In RStudio, open the R script (Bio332_19_ttest(111).R) that you downloaded from Canvas. (Open File -> navigate to Desktop, double click the file Bio332_19_ttest(111).R).
+2.	Each line on an R script (except empty and “comment lines” starting with #) has to be executed. You can do that line by line (recommended), or all at the same time (will only work if the script is edited correctly). To execute a line, click on the line you want to execute (usually all lines have to be run sequentially), then click on “Run” (the button towards the top right with a green arrow pointing to the right). Note: While executing code lines, make sure to wait while R is loading software packages at the beginning before proceeding to the next line. Read the green comments in between black lines of code. Not all commands produce output. You know that your command worked and is finished if the cursor > is returned to the next line in the console without a red error message. Do not proceed before this happens or R will return errors later in the script. Also note that some red messages are not errors, so do read R’s responses carefully.
+3.	Initially, R needs to load certain software packages, which in our case you do in the first few lines.
+4.	Lines that start with a hash # are so-called “comment lines”. These lines contain comment for the user, in this case you, to understand what you are doing in the following line. Read the comments, since they tell you details without which the code on the next line might not run.
+5.	Figure 1 shows a typical RStudio view.
+
+ 
+Figure 1. R Studio view with four panels. The top left panel is the place where R Studio loads the R script. Note the different font colors where green lines are comments that are not executed and black/blue lines are script lines to be run one at a time. Executed commands show up in the console (lower left). Plots show up in the lower right hand panel. The upper right panel shows what data sets are loaded into memory. For now, you can safely ignore this panel.
+
+6.	The next line is probably the most complicated to understand in the whole script. You need to tell R where your data files are. You do that by assigning the data from your file to a variable (here “my_data”, but R doesn’t care what you call it as long as you are consistent) using the characters <- as code and the command read.csv. In parentheses after the command is the file address. You will have to edit this address to reflect your own data file’s location. If you put the Bio332_19_ttest(111).csv file on the desktop (as recommended, R should be able to read the file. 
+a.	If you use a Mac, your address will look similar to this: “/Users/TO.BE.EDITED/Desktop/ Biofilms_ttest.csv”. Note that you need to edit the field TO.BE.EDITED. This field contains your computer’s home directory name. 
+b.	If you use a Windows machine, your address will look similar to this:
+C:"\Users\TO.BE.EDITED\Desktop\Biofilms_ttest.csv ".
+Note that you need to edit the field TO.BE.EDITED. This field contains your computer’s home directory name. For the Mac computers in TH 311 the username is “biology”.
+7.	From here on out, read the comments (indicated as lines starting with #) as they explain what’s happening in the following lines of the script that will need to be executed. First you will run lines to determine statistical significance and then to produce and edit a graph (which will appear in the right hand bottom panel of your RStudio window). After you run all the lines through “my_ttest”, look at the statistical output in the bottom left corner of RStudio (the console). The “Welch Two Sample t-test” analysis gives you information whether or not the averages of your two samples are statistically significantly different from each other. Statisticians use the p-value to determine this. A p-value > 0.05 is generally considered as a sign that the differences in average (mean) are NOT statistically significantly different from each other, while a p-value < 0.05 suggests that the two averages you are comparing are statistically significantly different. R will produce 8 lines of output. All we care about at this point is the second line, which contains the p-value. Note that R uses scientific notation for the value (e.g. 1.5 x 10 -5). If you see the value 2.2e-16 it means 2.2 x 10-16 and is the lowest value R can report (it never goes all the way to zero). Look for the p-value on your example data and report the value here:
+The p-value for t-test example data is: _________________ (report this value on the postlab sheet)
+Note: later, you will analyze your data ONLY with the ANOVA since you have more than two samples to compare. T-tests can only be used when your data set has exactly two samples.
+8.	Go back to executing the remainder of the script by executing each line one at a time. When you have the figure created in R (lower right hand panel in RStudio), click on Export -> Save as PDF, in the bottom right window, then change the file name to Bio332_19_sample_ttest_graph.pdf and click save. Later on when you want to use this or other graphs in your report, simply insert it into your Word document. In our case, save the t-test plot to your Desktop, then insert it into the postlab Word document. 
+ANOVA
+9.	Next, try out the ANOVA analysis using the files Bio332_19_ANOVA(111).csv, and Bio332_19_ANOVA(111).R. Open the R script in RStudio, make sure the .csv example data file is on your Desktop, and then follow the instructions in the script line by line.
+10.	After running all the lines through “summary(my_ANOVA)” look at your statistical output:
+11.	The ANOVA analysis only gives you information whether or not any one of the samples is different from any other sample, but not which one. For that you also have to interpret the Tukey HSD test. To get the p-value for the ANOVA look for the number under Pr(>F) in your output. Record and later report this value as the p-value for the ANOVA in your postlab. Look for the p-value on your example data and report the value here:
+The ANOVA p-value for the Bio332_19_ANOVA(111).csv data is: ______________
+
+12.	The Tukey test is more useful than the ANOVA p-value by itself. If you haven’t yet, run those lines of code now. The Tukey test basically performs comparisons between all possible combinations of samples – in your case of all three samples – and provides “groups” that are labeled with a letter. Any group not connected with any other group by the same letter is statistically significantly different from each other. If groups are connected by the same letter (for example have the same letter or share at least one as in AB or AC), then those groups are not statistically significantly different from each other. Note the letters for each group. You will need them in the next step and have to report them. Careful: you cannot run a Tukey test without having run an ANOVA first. R notices uses the ANOVA output as Tukey test input, so nothing for you to worry about if you have run your ANOVA first.
+
+13.	You now need to enter the letters from the Tukey test into the last four lines of your script, according to their values provided to you by the R output in the console (the bottom left window in RStudio). In other words, you must edit the script in the annotate lines below the text that reads “#Make graph. Note that for lines…” such that each line provides the proper letter for each treatment. X=1 is the first treatment, X=2 is the second and so on.
+
+14.	When you have the figure created in R, click on Export, in the bottom right window, then click on “Directory”, save as PDF, and then choose where you want to save the file (for example Desktop), then change the File name to Bio332_19_ANOVA_graph.pdf and click save. Insert the ANOVA graph into your postlab.
+
+
+Analyzing your own data
+
+a)	Create your data file for the ANOVA 
+For your second ANOVA with your own data create a data sheet using your own data. The file should look similar to this (but contain your own data):
+
+Treatment	Response
+Genotype 1	0.945
+Genotype 1	0.966
+Genotype 1	0.955
+Genotype 2	0.012
+Genotype 2	0.015
+Genotype 2	0.042
+Genotype 3	0.333
+Genotype 3	0.342
+Genotype 3	0.234
+
+Save the data file as a .csv file, NOT as an .xls or .xlsx or .numbers file. Name it Bio332_own_ANOVA.csv
+and save the file to your Desktop folder. It is important that the file name is spelled exactly as written here and saved to the Desktop (not a different folder) or your R script will not find the file later on. Set the file aside.
+
+Now that you have successfully tried out the example R scripts and graphed two nice plots (one for the t-test and one for the ANOVA example data) it is time to graph and statistically analyze your own data.
+1.	Look back at the section “formatting your data” above. The file you now need is the one you created earlier called Biofilms_own_ANOVA.csv. Check that these files are on the Desktop folder, or else R won’t be able to find them.
+2.	Now open the Bio332_19_ANOVA(111).R script and use “save as” to save a copy of it with a new file name. Save it as Bio332_19_ANOVA(111)_edit.R on the Desktop. Saving a copy of this file will allow you to go back to the original in case you need to do so later.
+3.	In the new script file (Bio332_19_ANOVA(111)_edit.R) edit the input line 
+my_data <- read.csv ("/Users/TO.BE.EDITED/Desktop/Bio332_own_ANOVA.csv", header = TRUE) 
+so that it reflects your home directory (you already did that for the example file) and also the new file name with your own data that you made earlier and called Bio332_own_ANOVA.csv. If you don’t make the change R will remember the previous file you used and simply work with that data set. With your new input data you will overwrite R’s memory and “my_data” will now no longer contain the example data but your own data.
+4.	Now execute the rest of the script without having to change anything else, except for the lines that begin with “annotate”. Here you need to edit the labels according to your new HSD results.
+5.	Report the following data here (and on the postlab)
+a)	P-value for own data ANOVA: ___________________
+b)	Letter groupings for each of the four treatments from the HSD test:
+control:_________________
+treatment_A:________________
+treatment_B:_______________
+Create a graph and insert that graph into your postlab as well.
+Exercise 2:
+Now that you have learned the syntax of RStudio as well as have been introduced to two statistical tests using RStudio it is time for a quick overview of the most important statistical tests you will need in Plant Physiology. In exercise 1, both the t-test and the ANOVA were introduced without checking the data carefully for important assumptions that you make when using the two tests. Normally, you should always check these assumptions first. In this exercise you will be shown how to do that. What you assume when you run certain tests is how the data follow certain mathematical patterns. In this class we will not take the time to look at the math behind these assumptions, but it is important that you know the mechanics of checking your data before selecting a test. If you fail to do this carefully you run the risk that your data analysis is void because a test that makes certain assumptions is only accurate if these assumptions are met.
+The goal of exercise 2 is to familiarize you with several statistical tests that each are used in one type of data analysis. For example, in Exercise 1 you were introduced to the t-test, which analyzes differences in means between exactly 2 categories of samples, such as control and treatment. If you are comparing more than 2 categories, such as control, treatment A and treatment B, you cannot use a t-test and instead have to use the ANOVA. Both tests assume that your data are a) normally distributed, and b) the amount of variation around the mean (more specifically the “variance”)  is similar between categories you are comparing. If that is not the case with your data there are two ways to handle this: First, you can transform your data (for example take the log or the square of all your data and then check again if your data are now normally distributed). Second, you can use a different test that doesn’t require normality and equal variance. Those types of tests are called non-parametric tests. The downside is that these tests are less powerful and sometimes will call two means statistically non-significant when a parametric (t-test or ANOVA) can find significant differences. The tests to use for non-normally distributed data are called Mann-Whitney-U test (the non-parametric equivalent to the t-test), and the Kruskal-Wallis or Wilcoxon test (the non-parametric equivalent to the ANOVA). To determine if certain assumptions are met, there are also two tests you will learn to use: the Shapiro-Wilk test (checks for normality of data) and the Levene test (checks for similar or “homogeneous” variances) .
+In addition to these four tests, exercise 2 will introduce you to paired t-tests and 2-way ANOVAs. For comparing two treatments of samples that are paired (e.g. same individual measured before and after treatment) you can use a paired t-test. For comparing treatments of samples that fall in more than two categories (for example plant height in two types of light and two types of temperature conditions) you can use the 2-way ANOVA.
+Figure 2  below provides a graphical overview over the tests you want to choose under given conditions.
+
+
+
+ 
+Figure 2:  Overview of  steps to take  while deciding on the  correct  statistical tests needed for the analysis of a given data set.
+
+
+1. Download and open the R script  Bio332_19_Quick_R_stats_AM122018.R in a new RStudio window.
+
+2. Follow the instructions embedded in the R script as green comments. Don’t be too concerned with understanding each command. Once you are ready to analyze your own data, take snippets of code, copy it to a new script window and edit the script as needed. While you are working through this lab, do take a look at the code and see if you can start to understand some of the syntax. Use Google to find out more by simply copying and pasting R code into Google.
+
+3. Once you get to the end of the tutorial where you are using the data set with red light and darkness data the tutorial will walk you through a subset of the data analysis only (red light data). Editing the red light analysis code create the same analysis for the darkness data. Tip: before editing the code for the red light analysis copy and paste it and work on the copied part so you can look back to the original code for the red light analysis.
+
+
+
+
+
+
+
+
+ 
+Bio 332: Statistics postlab					Name: __________________
+
+
+1.	The p-value for t-test example data is: _________________
+2.	Insert the t-test plot here:
+
+
+
+Graph goes here
+
+
+
+
+3.	The ANOVA p-value for the Bio332_ANOVA(111).csv data is: ______________
+4.	Insert the ANOVA test plot here:
+
+
+
+Graph goes here
+
+
+
+
+5.	Report the following data here (and on the postlab)
+a) p-value for own data ANOVA: ___________________
+b) Letter groupings for each of the four treatments from the HSD test:
+control:_________________
+treatment_A:________________
+treatment_B:_______________
+Create a graph and insert that graph into your postlab as well.
+
+Graph goes here
+
+6.	At home, create a plot for the combined analysis for the dark and red light data from the 2-way ANOVA and 3-way ANOVA part of the tutorial. Turn in this plot by email by Friday 5 pm of the week in which the lab was held.
+
+
